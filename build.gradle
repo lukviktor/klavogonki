@@ -2,18 +2,26 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group 'org.example'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+//нужно для винды, так как руские шаги не будут найдены
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'io.cucumber:cucumber-java:7.9.0'
-    implementation 'com.codeborne:selenide:6.12.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'io.cucumber:cucumber-java:7.1.0'
+    testImplementation 'com.codeborne:selenide:6.13.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.1.0'
 }
 
 test {
